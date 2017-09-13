@@ -1,0 +1,12 @@
+version: '3.3'
+services:
+  4pbot-server:
+    build: .
+    container_name: 4pbot-server
+    ports:
+      - "8080:8080"
+    environment:
+      GQ_URL:
+    volumes:
+      - ./src:/usr/src/app/src
+    command: "yarn dev"

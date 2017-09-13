@@ -31,12 +31,11 @@ export const getWeightedAverage = (reports, totalWeight) => {
  */
 export const delayForPayment = (payment) => {
   //Find weighted average of all actual reports
-
   const delayReports = payment.dateReports
     .filter(report => report.type === ReportType.Actual)
     .map(report => {
       return {
-        delay: findDaysDifference(moment(payment.expectedDate), moment(report)),
+        delay: findDaysDifference(moment(payment.expectedDate), moment(report.date)),
         weight: report.weight
       }
     });
