@@ -1,13 +1,13 @@
 import request from 'supertest';
 import app from '../src/app.js';
 
-describe('GET /', () => {
+describe.skip('GET /', () => {
   it('should render properly', async () => {
     await request(app).get('/').expect(200);
   });
 });
 
-describe('GET /list', () => {
+describe.skip('GET /list', () => {
   it('should render properly with valid parameters', async () => {
     await request(app)
       .get('/list')
@@ -20,7 +20,7 @@ describe('GET /list', () => {
   });
 });
 
-describe('GET /404', () => {
+describe.skip('GET /404', () => {
   it('should return 404 for non-existent URLs', async () => {
     await request(app).get('/404').expect(404);
     await request(app).get('/notfound').expect(404);
