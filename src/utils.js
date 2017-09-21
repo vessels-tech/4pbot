@@ -6,3 +6,15 @@ export const getError = (statusCode, message) => {
 
   return error;
 }
+
+export const isNullOrUndefined = (thing) => {
+  if (thing === undefined) {
+    return true;
+  }
+
+  if (this === null ) {
+    return true;
+  }
+
+  return false;
+}

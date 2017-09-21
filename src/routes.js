@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { request } from 'graphql-request';
 
-import { getError } from './utils';
+import { getError, isNullOrUndefined } from './utils';
 import { allPastPaymentsQuery } from './queries';
 import {
   delayForPayment,
@@ -29,53 +29,78 @@ const childrenParser = (childrenText) => {
 }
 
 const paymentParser = (query) => {
-  console.log(query);
+  return new Promise((resolve, reject) => {
+    const {
+      elementary_school_children,
+      expecting_baby,
+      high_school_children,
+      young_children,
+    } = query;
 
-  const {
-    elementary_school_children,
-    expecting_baby,
-    high_school_children,
-    young_children,
-  } = req.query;
+    let pregnant = false;
+    if (expecting_baby.toLowerCase() === "yes"
+        || expecting_baby === '1'
+        || expecting_baby.toLowerCase() === 'true'
+      ) {
+      pregnant = true;
+    }
 
-  let pregnant = false;
-  if (expecting_baby.toLowerCase() === "yes") {
-    pregnant = true;
-  }
+    let youngChildren;
+    let elementarySchoolChildren;
+    let highSchoolChildren;
 
-  return {
-    pregnant,
-    youngChildren: childrenParser(young_children),
-    elementarySchoolChildren: childrenParser(elementary_school_children),
-    highSchoolChildren: childrenParser(high_school_children)
-  };
+    try {
+      youngChildren = childrenParser(young_children);
+      elementarySchoolChildren = childrenParser(elementary_school_children);
+      highSchoolChildren = childrenParser(high_school_children);
+    } catch (err) {
+      console.log("OH no!");
+      return reject(err);
+    }
+
+    console.log(youngChildren);
+
+    return resolve({
+      pregnant,
+      youngChildren,
+      elementarySchoolChildren,
+      highSchoolChildren,
+    });
+  });
 }
 
 routes.get('/payment', (req, res) => {
-  const {
-    pregnant,
-    youngChildren,
-    elementarySchoolChildren,
-    highSchoolChildren
-  } = paymentParser(req.query);
+  paymentParser(req.query)
+    .then(({
+      pregnant,
+      youngChildren,
+      elementarySchoolChildren,
+      highSchoolChildren
+    }) => {
+      if (isNullOrUndefined(pregnant)||
+          isNullOrUndefined(youngChildren) ||
+          isNullOrUndefined(elementarySchoolChildren) ||
+          isNullOrUndefined(highSchoolChildren)
+      ) {
+        res.status(400);
+        return res.send('Error. Could not understand query.');
+      }
 
-  if (!pregnant ||
-      !youngChildren ||
-      !elementarySchoolChildren ||
-      !highSchoolChildren
-  ) {
-    res.status(400);
-    return res.send('could not understand query.');
-  }
+      const { x, y } = getPaymentFactors(elementarySchoolChildren, highSchoolChildren);
+      const paymentEstimate = getPaymentEstimate(x, y);
+      const conditionsList = getConditionsList(pregnant, youngChildren, elementarySchoolChildren, highSchoolChildren)
+        .reduce((acc, curr) => acc + '\n' + curr, '');
 
-  const { x, y } = getPaymentFactors(elementarySchoolChildren, highSchoolChildren);
-  const paymentEstimate = getPaymentEstimate(x, y);
-  const conditionsList = getConditionsList(pregnant, youngChildren, elementarySchoolChildren, highSchoolChildren);
+      const responseString = `We estimate your payment to be: ${paymentEstimate}p a month, up to ___ a year.${conditionsList}\n`;
 
-  const responseString = `We estimate your payment to be:${paymentEstimate}, up to y a year.\n${conditionsList.map(condition => `${condition}\n`)}`;
-
-  return res.send(responseString);
-});
+      res.send(responseString);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500);
+      res.send('Error: ', err);
+    });
+  });
 
 routes.get('/next_date', (req, res) => {
   const { zip } = req.query;

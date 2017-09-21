@@ -39,20 +39,26 @@ export const getPaymentEstimate = (x, y) => {
 
 /**
  * Given a current household situation, return an array of strings of the conditions they must meet
+ * ref: http://www.officialgazette.gov.ph/programs/conditional-cash-transfer/
  */
 export const getConditionsList = (pregnant, youngChildren, elementarySchoolChildren, highSchoolChildren) => {
   const conditionsList = [];
 
+  //Conditions for everyone:
+  conditionsList.push('You must attend the family development sessions, which include topics on responsible parenting, health, and nutrition.');
+
   if (pregnant) {
-    conditionsList.push('Attend health clinic until baby is born.');
+    conditionsList.push('Pregnant women must avail pre- and post-natal care, and be attended during childbirth by a trained professional.');
   }
 
   if (youngChildren > 0) {
-    conditionsList.push('Young children conditions');
+    conditionsList.push('Children aged 0-5 must receive regular preventive health check-ups and vaccines.');
+    conditionsList.push('Children aged 6-14 must receive deworming pills twice a year.');
   }
 
   if (elementarySchoolChildren + highSchoolChildren > 0) {
-    conditionsList.push('School age children conditions');
+    //This doesn't line up 100% with the question we are asking, but that's ok.
+    conditionsList.push('Children-beneficiaries aged 3-18 must enroll in school, and maintain an attendance of at least 85% of class days every month.');
   }
 
   return conditionsList;
