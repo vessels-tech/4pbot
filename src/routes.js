@@ -3,7 +3,12 @@ import { request } from 'graphql-request';
 
 import { getError } from './utils';
 import { allPastPaymentsQuery } from './queries';
-import { delayForPayment } from './calc';
+import {
+  delayForPayment,
+  getPaymentFactors,
+  getPaymentEstimate,
+  getConditionsList
+} from './calc';
 
 const routes = Router();
 const GQ_URL = process.env.GQ_URL;
@@ -15,6 +20,62 @@ routes.get('/', (req, res) => {
   res.render('index', { title: 'Express Babel' });
 });
 
+const childrenParser = (childrenText) => {
+  if (childrenText.indexOf('+') > -1) {
+    return 3; //3 is max for now.
+  }
+
+  return parseInt(childrenText);
+}
+
+const paymentParser = (query) => {
+  console.log(query);
+
+  const {
+    elementary_school_children,
+    expecting_baby,
+    high_school_children,
+    young_children,
+  } = req.query;
+
+  let pregnant = false;
+  if (expecting_baby.toLowerCase() === "yes") {
+    pregnant = true;
+  }
+
+  return {
+    pregnant,
+    youngChildren: childrenParser(young_children),
+    elementarySchoolChildren: childrenParser(elementary_school_children),
+    highSchoolChildren: childrenParser(high_school_children)
+  };
+}
+
+routes.get('/payment', (req, res) => {
+  const {
+    pregnant,
+    youngChildren,
+    elementarySchoolChildren,
+    highSchoolChildren
+  } = paymentParser(req.query);
+
+  if (!pregnant ||
+      !youngChildren ||
+      !elementarySchoolChildren ||
+      !highSchoolChildren
+  ) {
+    res.status(400);
+    return res.send('could not understand query.');
+  }
+
+  const { x, y } = getPaymentFactors(elementarySchoolChildren, highSchoolChildren);
+  const paymentEstimate = getPaymentEstimate(x, y);
+  const conditionsList = getConditionsList(pregnant, youngChildren, elementarySchoolChildren, highSchoolChildren);
+
+  const responseString = `We estimate your payment to be:${paymentEstimate}, up to y a year.\n${conditionsList.map(condition => `${condition}\n`)}`;
+
+  return res.send(responseString);
+});
 
 routes.get('/next_date', (req, res) => {
   const { zip } = req.query;

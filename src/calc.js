@@ -2,6 +2,63 @@ import moment from 'moment'
 
 import { ReportType } from './enums'
 
+
+export const getPaymentFactors = (elementarySchoolChildren, highSchoolChildren) => {
+  const maxChildren = 3;
+  let x = 0;
+  let y = 0;
+
+  if (highSchoolChildren >= maxChildren) {
+    return {
+      x: 0,
+      y: maxChildren
+    };
+  }
+
+  if (elementarySchoolChildren + highSchoolChildren > maxChildren) {
+    return {
+      x: maxChildren - highSchoolChildren,
+      y: highSchoolChildren
+    };
+  }
+
+  return {
+    x: elementarySchoolChildren,
+    y: highSchoolChildren
+  };
+}
+
+export const getPaymentEstimate = (x, y) => {
+
+  //ref: http://pantawid.dswd.gov.ph/images/stories/pantawidfaq.pdf
+  return 500 + x * 300 + y * 500;
+
+  //TODO: add maximum calculations
+  //TODO: what happens if a child misses school? Does this count towards the total?
+}
+
+/**
+ * Given a current household situation, return an array of strings of the conditions they must meet
+ */
+export const getConditionsList = (pregnant, youngChildren, elementarySchoolChildren, highSchoolChildren) => {
+  const conditionsList = [];
+
+  if (pregnant) {
+    conditionsList.push('Attend health clinic until baby is born.');
+  }
+
+  if (youngChildren > 0) {
+    conditionsList.push('Young children conditions');
+  }
+
+  if (elementarySchoolChildren + highSchoolChildren > 0) {
+    conditionsList.push('School age children conditions');
+  }
+
+  return conditionsList;
+}
+
+
 /**
  * Given two dates, find the number of days from the first moment to the second
  */

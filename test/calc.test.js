@@ -1,7 +1,42 @@
 import moment from 'moment'
 
-import { findDaysDifference, getTotalWeight, getWeightedAverage } from '../src/calc.js'
+import { getPaymentFactors, getPaymentEstimate, findDaysDifference, getTotalWeight, getWeightedAverage } from '../src/calc.js'
 
+
+describe('getPaymentFactors', () => {
+  it('should always equal the maxChildren if the total children is equal or above maxChildren', () => {
+    const { x, y } = getPaymentFactors(3, 3);
+    expect(x + y).toBe(3);
+  });
+
+  it('should always equal the maxChildren if the total children is equal or above maxChildren', () => {
+    const { x, y } = getPaymentFactors(1, 2);
+    expect(x + y).toBe(3);
+  });
+
+  it('should favour older children over younger children', () => {
+    const { x, y } = getPaymentFactors(3, 3);
+    expect(x).toBe(0);
+    expect(y).toBe(3);
+  });
+
+  it('should favour older children over younger children', () => {
+    const { x, y } = getPaymentFactors(1, 3);
+    expect(x).toBe(0);
+    expect(y).toBe(3);
+  });
+
+  it('should be less than maxChildren if the total is less than maxChildren', () => {
+    const { x, y } = getPaymentFactors(0, 2);
+    expect(x + y).toBe(2);
+  });
+});
+
+describe('getPaymentEstimate', () => {
+  it('returns the correct estimate', () => {
+    expect(getPaymentEstimate(2, 1)).toBe(500 + 2 * 300 + 1 * 500);
+  })
+})
 
 describe('findDaysDifference', () => {
   it('should find the difference between 2 moments', () => {
