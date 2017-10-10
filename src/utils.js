@@ -8,7 +8,7 @@ export const getError = (statusCode, message) => {
 }
 
 export const isNullOrUndefined = (thing) => {
-  if (thing === undefined) {
+  if (typeof thing === 'undefined') {
     return true;
   }
 

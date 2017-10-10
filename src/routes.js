@@ -54,11 +54,8 @@ const paymentParser = (query) => {
       elementarySchoolChildren = childrenParser(elementary_school_children);
       highSchoolChildren = childrenParser(high_school_children);
     } catch (err) {
-      console.log("OH no!");
       return reject(err);
     }
-
-    console.log(youngChildren);
 
     return resolve({
       pregnant,
@@ -102,6 +99,17 @@ routes.get('/payment', (req, res) => {
     });
   });
 
+
+/**
+ * submit a structured past reading, with information such as date, location, 
+ */
+routes.post('/past_date', (req, res) => {
+
+})
+
+/**
+ * Allow a user to query the next date for a payment, based on past dates
+ */
 routes.get('/next_date', (req, res) => {
   const { zip } = req.query;
   let { postcode } = req.query;
@@ -120,7 +128,6 @@ routes.get('/next_date', (req, res) => {
   const query = allPastPaymentsQuery(postcode, new Date());
   request(GQ_URL, query.query, query.variables)
     .then(data => {
-
       if (data.allPayments.length === 0) {
         return res.send(`Sorry. We couldn't find past payments for this postcode.\n`);
       }
