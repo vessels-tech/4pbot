@@ -1,4 +1,4 @@
-# 4Pbot v0.1 Script
+# 4Pbot v0.1 Feature Specification
 
 
 ## Overview
