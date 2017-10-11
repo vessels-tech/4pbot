@@ -108,23 +108,34 @@ Version 0.1 of this feature will serve to aggregate the complaints into a centra
 - Hi, I'm 4Pbot. I'm here to help you with the 4Ps.
 - I'm currently a work in progress, so please be patient with me. Plus, any feedback you have to share about 4Pbot will be really valuable
 - Here's a list of things you can ask me:
-- <show menu>
+- _show menu_
 
-### Menu
+#### Menu
 
-*When is my next payout?.* We can let you know when the next payment is for your Barangay. If it looks like there are any delays, I will try and let you know.
-
-*I'd like to make an anonymous complaint.* Having some trouble receiving your payout? Or are you not getting paid enough? I can help.
-
-*Help me calculate me payout.* I can calculate how much you should be getting paid, and 
+- **When is my next payout?.** We can let you know when the next payment is for your Barangay. If it looks like there are any delays, I will try and let you know.
+- **I'd like to make an anonymous complaint.** Having some trouble receiving your payout? Or are you not getting paid enough? I can help.
+- **Help me calculate my payout.** I can calculate how much you should be getting paid, and let you know what conditions you need to meet.
+- **What's the latest 4Ps news?**. I can tell you the latest happenings with the 4ps and DSWD.
+- **4Pbot feedback**. Have I been helpful at all? Let me know.
 
 ### Payment Estimator
-
+- Sure, I can help with that.
+- I should let you know that this feature is still being worked on, so make sure to check with your Parent Leader as well! __todo__ finish
+- Where do you live?
+	- _share location_
+- The next scheduled payout for _barangay_ is between _date_1_ and _date_2_. However, it looks like payments might be delayed by up to _delay_time_
 
 ### Anonymous Complaints
+
+
 ### Payments & Conditions Calculator
+
+
 ### 4P News
 
+
+### Feedback
+>This section will also be triggered by a push notification to the test users after a while.
 
 
 ### Notes:
