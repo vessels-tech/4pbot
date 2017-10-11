@@ -45,6 +45,7 @@ The purpose of this document is to provide a starting point for the implementati
 
 #### 2.2 Outcomes
 - __TODO__ What does success for 0.1 look like?
+- People use this to let us know of problems
 - One goal for this feature could be to establish 4Pbot as a trusted third party which
 	- Can better evaluate the effectiveness of programs *govt oriented*
 	- Can take action to help resolve issues on behalf of a client *client oriented*
@@ -58,6 +59,7 @@ The purpose of this document is to provide a starting point for the implementati
 Version 0.1 of this feature will serve to aggregate the complaints into a central place. Further development of this concept may include:
 1. establishing a link with DSWD to show the value of data being reported
 2. allow a Parent Leader or City Link to initiate an action (with the permission)
+3. Crowdsource advice from other users anonymously
 
 ### 3.0 Payment & Conditions Calculator
 *DISCLAIMER: This feature is not all that valid. Our research shows that clients already have a good understanding of the workings of the system, and recieve new information (eg. about the rice subsidy) from the Parent Leader or City Link. We may end up scrapping this feature, but as it is already 50% built, we might go ahead and see how much people will use it. If nothing else, it will serve as a useful introduction to others who are curous about the bot, and flesh out the initial features.*
@@ -105,30 +107,72 @@ Version 0.1 of this feature will serve to aggregate the complaints into a centra
 
 ### Introduction
 
-- Hi, I'm 4Pbot. I'm here to help you with the 4Ps.
-- I'm currently a work in progress, so please be patient with me. Plus, any feedback you have to share about 4Pbot will be really valuable
-- Here's a list of things you can ask me:
-- _show menu_
+- Hi, {{first name}}! I'm 4Pbot.
+
+I'm here to help you with your questions and problems with the 4Ps.
+
+- I'm currently a work in progress, so please be patient with me. I'm also looking for any feedback you have along the way.
+- For starters, can you please share your phone number with me? It will help me to get in touch later on.
+- What you've entered does not look like a number. Please try again.
+- Thanks!
+
 
 #### Menu
+- Here's some of the things you can ask me:
+**Title:** When is my next payout?
+**Subtitle:** I can estimate when your next payout is. I can also see if there are any delays.
+**Button Name:** When is my payout?
 
-- **When is my next payout?.** We can let you know when the next payment is for your Barangay. If it looks like there are any delays, I will try and let you know.
-- **I'd like to make an anonymous complaint.** Having some trouble receiving your payout? Or are you not getting paid enough? I can help.
-- **Help me calculate my payout.** I can calculate how much you should be getting paid, and let you know what conditions you need to meet.
-- **What's the latest 4Ps news?**. I can tell you the latest happenings with the 4ps and DSWD.
+**Title:** I'd like to report a problem.
+**Subtitle:** Having trouble receiving your payout? Or are you not getting paid enough?
+**Button Name:** Make a secret report
+
+**Title:** Help me calculate my payout.
+**Subtitle:** Calculate your payout, and what conditions you need to meet.
+**Button Name:** Calculate my payout.
+
+**Title:** What's the latest 4Ps news?
+**Subtitle:** I can tell you the latest happenings with the 4ps and DSWD.
+**Button Name:** 4Ps news
+
+**Title:** 4Pbot feedback
+**Subtitle:** Have I been helpful at all? Let me know.
+**Button Name:** Leave feedback
+
 - **4Pbot feedback**. Have I been helpful at all? Let me know.
 
 ### Payment Estimator
-- Sure, I can help with that.
-- I should let you know that this feature is still being worked on, so make sure to check with your Parent Leader as well! __todo__ finish
-- Where do you live?
-	- _share location_
-- The next scheduled payout for _barangay_ is between _date_1_ and _date_2_. However, it looks like payments might be delayed by up to _delay_time_
 
-### Anonymous Complaints
+- Sure, I can help with that.
+- I should let you know I'm still learning this feature, so my estimates may be a little wrong.
+
+Make sure to check with your parent leader about the payout day as well.
+- Where do you live?
+- The next scheduled payout for _barangay_ is between _date_1_ and _date_2_. However, it looks like payments might be delayed by up to _delay_time_
+- menu
+
+### Report a problem
+- Sure, I can help with that.
+- Just to let you know, any complaints you make are private, and your personal information won't be shared with DSWD unless you give us permission.
+
+- What type of problem are you having?
+  - not receiving correct payment
+	- less than 3 of my children are enrolled
+  - details have not been updated
+  - other
+
+- Where do you live?
+- Tell us a few details about what the problem is.
+- Thanks!
 
 
 ### Payments & Conditions Calculator
+- I can help you to estimate your 4Ps payment. Just answer these few questions!
+- Are you pregnant or expecting a baby?
+- How many children do you have from ages 0-5?
+- How many children in your household are in elementary school?
+- How many children in your household are in high school?
+- Thanks! That's all we need to know.
 
 
 ### 4P News
