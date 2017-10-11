@@ -81,6 +81,8 @@ Version 0.1 of this feature will serve to aggregate the complaints into a centra
 ### 4.0 4P News
 > **Need:** clients may be missing out on top down news from DSWD, or other happenings in the 4Ps program. People are currently sharing news and information on Facebook (we think), but they may benefit from a more structured way of communicating / receiving news.
 
+**note** we can use a google sheets zapier integration for this! Don't have to even worry about database or apis!
+
 #### 4.1 User Stories
 - "As a client, when I ask the bot for the recent news, I am presented with 3 short (twitter length) highlights on what's been happening relevant to 4Ps clients"
 - "As client, stories that are over 2 weeks old are no longer relevant or useful to me."
@@ -118,7 +120,8 @@ I'm here to help you with your questions and problems with the 4Ps.
 
 
 #### Menu
-- Here's some of the things you can ask me:
+- Here's some of the things you can ask me:  
+
 **Title:** When is my next payout?
 **Subtitle:** I can estimate when your next payout is. I can also see if there are any delays.
 **Button Name:** When is my payout?
@@ -139,15 +142,12 @@ I'm here to help you with your questions and problems with the 4Ps.
 **Subtitle:** Have I been helpful at all? Let me know.
 **Button Name:** Leave feedback
 
-- **4Pbot feedback**. Have I been helpful at all? Let me know.
-
 ### Payment Estimator
 
 - Sure, I can help with that.
 - I should let you know I'm still learning this feature, so my estimates may be a little wrong.
-
-Make sure to check with your parent leader about the payout day as well.
-- Where do you live?
+- Make sure to check with your parent leader about the payout day as well.  
+- Where do you live?  
 - The next scheduled payout for _barangay_ is between _date_1_ and _date_2_. However, it looks like payments might be delayed by up to _delay_time_
 - menu
 
@@ -176,11 +176,18 @@ Make sure to check with your parent leader about the payout day as well.
 
 
 ### 4P News
-
+- These are the latest 3 stories I have about 4Ps.
+- menu
 
 ### Feedback
 >This section will also be triggered by a push notification to the test users after a while.
 
+- How would you rate your experience with 4PBot?
+- How could I be improved?
+- What are some other features you would like me to have?
+- Thanks!
+
 
 ### Notes:
+- Try and be personal, and colloquial where possible. Make sure that this could be understood by just about anybody (even a kid maybe!)
 - Going to try and keep everything 1st person - I, Me, My
